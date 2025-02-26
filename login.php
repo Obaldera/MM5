@@ -6,15 +6,11 @@ session_start();
 require_once 'includes/conexion.php';
 
 if(!empty($_POST['email']) && !empty($_POST['password'])){
-    $email = trim($_POST['email']);
-$password = $_POST['password'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
-$sql = "SELECT * FROM usuarios WHERE email = ?";
-$stmt = mysqli_prepare($db, $sql);
-mysqli_stmt_bind_param($stmt, "s", $email);
-mysqli_stmt_execute($stmt);
-$login = mysqli_stmt_get_result($stmt);
-
+    $sql = "SELECT * FROM usuarios WHERE email = '$email'";
+    $login = mysqli_query($db, $sql);
 
     $usuario = mysqli_fetch_assoc($login);
 
